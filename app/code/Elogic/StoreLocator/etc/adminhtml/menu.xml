@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Elogic_StoreLocator::storelocator" title="Store Locator" module="Elogic_StoreLocator" sortOrder="10" resource="Elogic_StoreLocator::storelocator"/>
+        <add id="Elogic_StoreLocator::store" title="Stores" module="Elogic_StoreLocator" sortOrder="50" parent="Elogic_StoreLocator::storelocator" action="storelocator/store/index" resource="Elogic_StoreLocator::storelocator"/>
+        <add id="Elogic_StoreLocator::test" title="Configuration" module="Elogic_StoreLocator" sortOrder="99" parent="Elogic_StoreLocator::storelocator" action="adminhtml/system_config/edit/section/store" resource="Elogic_StoreLocator::store"/>
+    </menu>
+</config>

@@ -1,0 +1,19 @@
+{
+    "elogic_store": {
+        "column": {
+            "store_id": true,
+            "store_name": true,
+            "store_image": true,
+            "store_schedule": true,
+            "store_address": true,
+            "store_description": true,
+            "store_latitude": true,
+            "store_longitude": true,
+            "store_url_key": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ELOGIC_STORE_STORE_URL_KEY": true
+        }
+    }
+}

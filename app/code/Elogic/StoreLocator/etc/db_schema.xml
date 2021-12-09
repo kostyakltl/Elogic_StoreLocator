@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="elogic_store" resource="default" engine="innodb" comment=" ">
+        <column xsi:type="smallint" name="store_id" padding="6" unsigned="false" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="store_name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="store_image" nullable="true" length="255" comment="Image"/>
+        <column xsi:type="varchar" name="store_schedule" length="255" nullable="true" comment="Schedule"/>
+        <column xsi:type="varchar" name="store_address" nullable="false" length="255" comment="Address"/>
+        <column xsi:type="varchar" name="store_description" nullable="false" length="255" comment="Descrition"/>
+        <column xsi:type="varchar" name="store_latitude" comment="Latitude format ##,######"/>
+        <column xsi:type="varchar" name="store_longitude" comment="Latitude format ###,######"/>
+        <column xsi:type="varchar" name="store_url_key" comment="Url key"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="ELOGIC_STORE_STORE_URL_KEY">
+            <column name="store_url_key"/>
+        </constraint>
+    </table>
+</schema>
