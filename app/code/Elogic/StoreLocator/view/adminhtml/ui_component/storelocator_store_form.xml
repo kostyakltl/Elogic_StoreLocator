@@ -39,8 +39,8 @@
         <dataProvider class="Elogic\StoreLocator\Ui\DataProvider\StoreDataProvider"
                       name="storelocator_store_form_data_source">
             <settings>
-                <requestFieldName>store_id</requestFieldName>
-                <primaryFieldName>store_id</primaryFieldName>
+                <requestFieldName>store_entity_id</requestFieldName>
+                <primaryFieldName>store_entity_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>
@@ -50,7 +50,7 @@
             <collapsible>false</collapsible>
             <opened>true</opened>
         </settings>
-        <field name="store_id" formElement="input">
+        <field name="store_entity_id" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">store</item>
@@ -59,7 +59,7 @@
             <settings>
                 <dataType>text</dataType>
                 <visible>true</visible>
-                <dataScope>store_id</dataScope>
+                <dataScope>store_entity_id</dataScope>
             </settings>
         </field>
         <field name="store_name" sortOrder="20" formElement="input">
@@ -142,81 +142,81 @@
                 <dataScope>store_address</dataScope>
             </settings>
         </field>
-        <dynamicRows name="store_schedule">
-            <settings>
-                <addButtonLabel translate="true">Add Schedule</addButtonLabel>
-                <additionalClasses>
-                    <class name="admin__field-wide">true</class>
-                </additionalClasses>
-                <componentType>dynamicRows</componentType>
-            </settings>
-            <container name="record" component="Magento_Ui/js/dynamic-rows/record">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="isTemplate" xsi:type="boolean">true</item>
-                        <item name="is_collection" xsi:type="boolean">true</item>
-                        <item name="componentType" xsi:type="string">container</item>
-                    </item>
-                </argument>
-                <field name="day" formElement="input">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <validation>
-                            <rule name="required-entry" xsi:type="boolean">false</rule>
-                        </validation>
-                        <dataType>text</dataType>
-                        <label>Day</label>
-                    </settings>
-                </field>
-                <field name="from" formElement="input">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <validation>
-                            <rule name="required-entry" xsi:type="boolean">false</rule>
-                        </validation>
-                        <dataType>text</dataType>
-                        <label>From</label>
-                    </settings>
-                </field>
-                <field name="to" formElement="input">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <validation>
-                            <rule name="required-entry" xsi:type="boolean">false</rule>
-                        </validation>
-                        <dataType>text</dataType>
-                        <label>To</label>
-                    </settings>
-                </field>
-                <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="fit" xsi:type="boolean">false</item>
-                        </item>
-                    </argument>
-                    <settings>
-                        <additionalClasses>
-                            <class name="some-class">true</class>
-                        </additionalClasses>
-                        <dataType>text</dataType>
-                        <label>Actions</label>
-                        <componentType>actionDelete</componentType>
-                    </settings>
-                </actionDelete>
-            </container>
-        </dynamicRows>
+<!--        <dynamicRows name="store_schedule">-->
+<!--            <settings>-->
+<!--                <addButtonLabel translate="true">Add Schedule</addButtonLabel>-->
+<!--                <additionalClasses>-->
+<!--                    <class name="admin__field-wide">true</class>-->
+<!--                </additionalClasses>-->
+<!--                <componentType>dynamicRows</componentType>-->
+<!--            </settings>-->
+<!--            <container name="record" component="Magento_Ui/js/dynamic-rows/record">-->
+<!--                <argument name="data" xsi:type="array">-->
+<!--                    <item name="config" xsi:type="array">-->
+<!--                        <item name="isTemplate" xsi:type="boolean">true</item>-->
+<!--                        <item name="is_collection" xsi:type="boolean">true</item>-->
+<!--                        <item name="componentType" xsi:type="string">container</item>-->
+<!--                    </item>-->
+<!--                </argument>-->
+<!--                <field name="day" formElement="input">-->
+<!--                    <argument name="data" xsi:type="array">-->
+<!--                        <item name="config" xsi:type="array">-->
+<!--                            <item name="fit" xsi:type="boolean">false</item>-->
+<!--                        </item>-->
+<!--                    </argument>-->
+<!--                    <settings>-->
+<!--                        <validation>-->
+<!--                            <rule name="required-entry" xsi:type="boolean">false</rule>-->
+<!--                        </validation>-->
+<!--                        <dataType>text</dataType>-->
+<!--                        <label>Day</label>-->
+<!--                    </settings>-->
+<!--                </field>-->
+<!--                <field name="from" formElement="input">-->
+<!--                    <argument name="data" xsi:type="array">-->
+<!--                        <item name="config" xsi:type="array">-->
+<!--                            <item name="fit" xsi:type="boolean">false</item>-->
+<!--                        </item>-->
+<!--                    </argument>-->
+<!--                    <settings>-->
+<!--                        <validation>-->
+<!--                            <rule name="required-entry" xsi:type="boolean">false</rule>-->
+<!--                        </validation>-->
+<!--                        <dataType>text</dataType>-->
+<!--                        <label>From</label>-->
+<!--                    </settings>-->
+<!--                </field>-->
+<!--                <field name="to" formElement="input">-->
+<!--                    <argument name="data" xsi:type="array">-->
+<!--                        <item name="config" xsi:type="array">-->
+<!--                            <item name="fit" xsi:type="boolean">false</item>-->
+<!--                        </item>-->
+<!--                    </argument>-->
+<!--                    <settings>-->
+<!--                        <validation>-->
+<!--                            <rule name="required-entry" xsi:type="boolean">false</rule>-->
+<!--                        </validation>-->
+<!--                        <dataType>text</dataType>-->
+<!--                        <label>To</label>-->
+<!--                    </settings>-->
+<!--                </field>-->
+<!--                <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">-->
+<!--                    <argument name="data" xsi:type="array">-->
+<!--                        <item name="config" xsi:type="array">-->
+<!--                            <item name="fit" xsi:type="boolean">false</item>-->
+<!--                        </item>-->
+<!--                    </argument>-->
+<!--                    <settings>-->
+<!--                        <additionalClasses>-->
+<!--                            <class name="some-class">true</class>-->
+<!--                        </additionalClasses>-->
+<!--                        <dataType>text</dataType>-->
+<!--                        <label>Actions</label>-->
+<!--                        <componentType>actionDelete</componentType>-->
+<!--                    </settings>-->
+<!--                </actionDelete>-->
+<!--            </container>-->
+<!--        </dynamicRows>-->
         <field name="store_longitude" sortOrder="70" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -247,7 +247,7 @@
                 <dataScope>store_latitude</dataScope>
             </settings>
         </field>
-        <field name="store_id" formElement="hidden">
+        <field name="store_entity_id" formElement="hidden">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">store</item>

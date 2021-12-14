@@ -63,7 +63,7 @@ class ImportCSV extends Command
      * @param StoreRepositoryInterface $storeRepository
      */
     public function __construct(
-        $name,
+        $name = 'import:store:csv',
         State $state,
         DirectoryList $directoryList,
         StoreInterfaceFactory $storeInterfaceFactory,

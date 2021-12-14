@@ -1,19 +1,14 @@
 <?php
 /**
- * @var $data StoreViewModel
+ * @var \Elogic\StoreLocator\Block\Store $block
  */
 
-use Elogic\StoreLocator\ViewModel\StoreViewModel;
+$store = $block->getStore();
 
-$store = $data->getStore();
 ?>
+
 <div class="store">
     <div id="store-<?= $store->getId() ?>" class="store">
-        <div class="description">
-            <h3><?= __("Description: ") ?></h3>
-            <span><?= $store->getDescription() ?></span>
-        </div>
-    <div id="store-<?= $store->url ?>" class="store">
         <div class="description">
             <h3><?= __("Description: ") ?></h3>
             <span><?= $store->getDescription() ?></span>
@@ -24,7 +19,7 @@ $store = $data->getStore();
         </div>
         <div class="image">
             <h3><?= __("Image: ") ?></h3>
-            <img src="<?= 'elogic/base_path/' . $store->getImage() ?>" width="300" height="400"/>
+            <img src="<?= '/pub/media/elogic/base_path/' . $store->getImage() ?>" alt="Store image" width="" height="400"/>
         </div>
         <div class="longitude">
             <h3><?= __("Longitude: ") ?></h3>

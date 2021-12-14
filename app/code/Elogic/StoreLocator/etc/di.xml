@@ -23,7 +23,7 @@
     </virtualType>
     <virtualType name="Elogic\StoreLocator\Model\ResourceModel\Store\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">elogic_store</argument>
+            <argument name="mainTable" xsi:type="string">elogic_store_entity</argument>
             <argument name="resourceModel" xsi:type="string">Elogic\StoreLocator\Model\ResourceModel\Store</argument>
         </arguments>
     </virtualType>
@@ -34,13 +34,13 @@
             </argument>
         </arguments>
     </type>
-    <type name="Magento\Framework\Console\CommandListInterface">
-        <arguments>
-            <argument name="commands" xsi:type="array">
-                <item name="import:store:csv" xsi:type="object">Elogic\StoreLocator\Console\Command\ImportCSV</item>
-            </argument>
-        </arguments>
-    </type>
+<!--    <type name="Magento\Framework\Console\CommandListInterface">-->
+<!--        <arguments>-->
+<!--            <argument name="commands" xsi:type="array">-->
+<!--                <item name="import:store:csv" xsi:type="object">Elogic\StoreLocator\Console\Command\ImportCSV</item>-->
+<!--            </argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
     <type name="Elogic\StoreLocator\Api\Data\StoreInterface">
         <arguments>
             <argument name="resource" xsi:type="object">Elogic\StoreLocator\Model\ResourceModel\Store</argument>

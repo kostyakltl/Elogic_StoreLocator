@@ -35,7 +35,7 @@ class Edit extends Action
     public function execute()
     {
 
-        $id = $this->getRequest()->getParam('store_id');
+        $id = $this->getRequest()->getParam('store_entity_id');
         $this->coreRegistry->register($id, $id);
 
 
@@ -48,15 +48,13 @@ class Edit extends Action
                 return $resultRedirect->setPath('*/*/');
             }
         }
-        $store = $this->storeRepository->getById($id);
 
-        $this->coreRegistry->register('store_id', $store);
+        $this->coreRegistry->register('store_entity_id', $store);
 
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Elogic_StoreLocator::storelocator');
         $resultPage->getConfig()->getTitle()->prepend(__('Store'));
-        $resultPage->getConfig()->getTitle()->prepend($store->getName($id));
-        $resultPage->addHandle('elogic_store' . $id);
+        $resultPage->addHandle('elogic_store_entity' . $id);
 
         return $resultPage;
     }

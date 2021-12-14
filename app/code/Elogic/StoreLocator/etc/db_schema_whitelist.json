@@ -1,19 +1,42 @@
 {
-    "elogic_store": {
+    "elogic_store_entity": {
         "column": {
-            "store_id": true,
-            "store_name": true,
-            "store_image": true,
-            "store_schedule": true,
+            "store_entity_id": true,
             "store_address": true,
-            "store_description": true,
             "store_latitude": true,
             "store_longitude": true,
+            "store_image": true,
+            "store_description": true,
             "store_url_key": true
         },
         "constraint": {
             "PRIMARY": true,
-            "ELOGIC_STORE_STORE_URL_KEY": true
+            "ELOGIC_STORE_ENTITY_STORE_URL_KEY": true
+        }
+    },
+    "elogic_store_attribute": {
+        "column": {
+            "store_attribute_id": true,
+            "store_attribute_code": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ELOGIC_STORE_ATTRIBUTE_STORE_ATTRIBUTE_CODE": true
+        }
+    },
+    "elogic_store_value": {
+        "column": {
+            "store_entity_id": true,
+            "store_attribute_id": true,
+            "store_id": true,
+            "store_value_id": true,
+            "value": true
+        },
+        "constraint": {
+            "ELOGIC_STORE_VAL_STORE_ENTT_ID_ELOGIC_STORE_ENTT_STORE_ENTT_ID": true,
+            "ELOGIC_STORE_VAL_STORE_ATTR_ID_ELOGIC_STORE_ATTR_STORE_ATTR_ID": true,
+            "ELOGIC_STORE_VALUE_STORE_ID_STORE_STORE_ID": true,
+            "PRIMARY": true
         }
     }
 }

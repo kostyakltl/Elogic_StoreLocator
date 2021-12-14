@@ -66,10 +66,6 @@ class Store extends Template
         return $store['store'];
     }
 
-    public function getImage()
-    {
-        
-    }
 
 
 

@@ -92,9 +92,9 @@ class StoreDataProvider extends ModifierPoolDataProvider
             return $this->loadedData;
         }
         $store = $this->request->getParam('store');
-        if (isset($store)) {
-            $this->collection->setStoreId($store);
-        }
+//        if (isset($store)) {
+//            $this->collection->setId($store);
+//        }
         $items = $this->collection->getItems();
         $mediaUrl = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
         foreach ($items as $store) {
@@ -122,6 +122,7 @@ class StoreDataProvider extends ModifierPoolDataProvider
             $this->loadedData[$store->getId()] = $store->getData();
             $this->dataPersistor->clear('store');
         }
+
         return $this->loadedData;
     }
 }

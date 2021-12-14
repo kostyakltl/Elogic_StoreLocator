@@ -32,7 +32,7 @@ class Store extends AbstractModel implements StoreInterface
      */
     public function getId()
     {
-        return $this->getData('store_id');
+        return $this->getData(self::STORE_ID);
     }
 
     /**
@@ -41,7 +41,7 @@ class Store extends AbstractModel implements StoreInterface
      */
     public function setId($store_id)
     {
-        $this->setData('store_id', $store_id);
+        $this->setData(self::STORE_ID, $store_id);
         return $this;
     }
 
@@ -198,5 +198,10 @@ class Store extends AbstractModel implements StoreInterface
     public function checkUrlKey($url)
     {
         return $this->_resource->checkUrlKey($url);
+    }
+
+    public function getAttributeValue($store_id, $storeId, $attributeCode)
+    {
+        return $this->_resource->getAttributeValue($store_id, $storeId, $attributeCode);
     }
 }

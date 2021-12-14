@@ -10,6 +10,7 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Elogic\StoreLocator\Api\StoreRepositoryInterface;
 use Elogic\StoreLocator\Api\Data\StoreInterfaceFactory;
 use Elogic\StoreLocator\Api\GeoCoderInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use function PHPUnit\Framework\isEmpty;
 use function Symfony\Component\String\s;
 
@@ -22,6 +23,7 @@ class Save extends Action
     private $imageUploader;
     private $json;
     private $geocoder;
+    private $storeManager;
 
     public function __construct(
         Context $context,
@@ -30,9 +32,11 @@ class Save extends Action
         StoreRepositoryInterface $storeRepository,
         ImageUploader $imageUploader,
         Json $json,
-        GeoCoderInterface $geoCoder
+        GeoCoderInterface $geoCoder,
+        StoreManagerInterface $storeManager
     )
     {
+        $this->storeManager = $storeManager;
         $this->geocoder = $geoCoder;
         $this->json = $json;
         $this->imageUploader = $imageUploader;
@@ -48,12 +52,15 @@ class Save extends Action
         $store = $this->storeFactory->create();
         $data = $this->getRequest()->getPostValue();
 
-        if (!$data['store_id']) {
-            $data['store_id'] = null;
+        if (!$data['store_entity_id']) {
+            $data['store_entity_id'] = null;
         }
         else {
-            $store->setId($data['store_id']);
+            $store->setId($data['store_entity_id']);
         }
+
+        $storeViewId = $this->storeManager->getStore()->getId();
+
 
         $store->setName($data['store_name']);
         $store->setDescription($data['store_description']);

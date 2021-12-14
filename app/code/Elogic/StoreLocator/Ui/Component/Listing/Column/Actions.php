@@ -40,20 +40,17 @@ class Actions extends Column
        parent::__construct($context, $uiComponentFactory, $components, $data);
    }
 
-    /**
-     * @param array $dataSource
-     * @return array
-     */
+
     public function prepareDataSource(array $dataSource)
     {
         if(isset($dataSource['data']['items'])) {
-            $storeId = $this->getData('store_id');
+            $storeId = $this->getData('store_entity_id');
         }
         foreach ($dataSource['data']['items'] as  &$item) {
            $item[$this->getData('name')]['edit'] = [
                'href' => $this->urlBuilder->getUrl(
                    self::URL_PATH_EDIT,
-                   ['store_id' => $item['store_id']]
+                   ['store_entity_id' => $item['store_entity_id']]
                 ),
                'label' => __('Edit'),
                'hidden' => false,
@@ -61,7 +58,7 @@ class Actions extends Column
            $item[$this->getData('name')]['delete'] = [
                 'href' => $this->urlBuilder->getUrl(
                     self::URL_PATH_DELETE,
-                    ['store_id' => $item['store_id']]
+                    ['store_entity_id' => $item['store_entity_id']]
                 ),
                 'label' => __('Delete'),
                 'hidden' => false,

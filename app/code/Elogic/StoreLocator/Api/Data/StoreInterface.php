@@ -9,9 +9,9 @@ namespace Elogic\StoreLocator\Api\Data;
 interface StoreInterface
 {
     /**
-     *
+     * Constants defined for keys of the data array.
      */
-    const STORE_ID                          = 'store_id';
+    const STORE_ID                          = 'store_entity_id';
     const STORE_NAME                        = 'store_name';
     const STORE_DESCRIPTION                 = 'store_description';
     const STORE_IMAGE                       = 'store_image';
