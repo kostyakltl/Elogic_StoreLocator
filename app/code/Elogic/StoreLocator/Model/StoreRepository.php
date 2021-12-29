@@ -7,12 +7,12 @@ namespace Elogic\StoreLocator\Model;
 use Elogic\StoreLocator\Api\Data\StoreInterface;
 use Elogic\StoreLocator\Api\Data\StoreInterfaceFactory;
 use Elogic\StoreLocator\Model\ResourceModel\Store as Resource;
-use Elogic\Storelocator\Model\ResourceModel\Store\Collection as StoreCollection;
 use Elogic\StoreLocator\Model\ResourceModel\Store\CollectionFactory;
 use Elogic\StoreLocator\Api\StoreRepositoryInterface;
 use Elogic\StoreLocator\Api\Data\StoreSearchResultInterface;
 use Elogic\StoreLocator\Api\Data\StoreSearchResultInterfaceFactory;
 
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchResultsInterfaceFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Exception;
@@ -45,7 +45,6 @@ class StoreRepository implements StoreRepositoryInterface
      * @param Resource $storeResource
      * @param CollectionFactory $collectionFactory
      * @param StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory
-     * @param CollectionProcessorInterface $collectionProcessor
      */
     public function __construct(
         StoreInterfaceFactory $storeFactory,
@@ -105,12 +104,11 @@ class StoreRepository implements StoreRepositoryInterface
     }
 
     /**
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param SearchCriteriaInterface $searchCriteria
      * @return StoreSearchResultInterface
      */
-    public function getList($searchCriteria)
+    public function getList(SearchCriteriaInterface $searchCriteria) : StoreSearchResultInterface
     {
-        /** @var StoreCollection $collection */
         $collection = $this->collectionFactory->create();
         foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
             foreach ($filterGroup->getFilters() as $filter) {
@@ -125,6 +123,4 @@ class StoreRepository implements StoreRepositoryInterface
         $searchResult->setTotalCount($collection->getSize());
         return $searchResult;
     }
-
-
 }

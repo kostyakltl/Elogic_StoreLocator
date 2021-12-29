@@ -6,6 +6,7 @@ namespace Elogic\StoreLocator\Api;
 
 use Elogic\StoreLocator\Api\Data\StoreInterface;
 use Elogic\StoreLocator\Api\Data\StoreSearchResultInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
 
 interface StoreRepositoryInterface
 {
@@ -13,7 +14,7 @@ interface StoreRepositoryInterface
      * @param StoreInterface $store
      * @return StoreInterface
      */
-    public function save(StoreInterface $store);
+    public function save(StoreInterface $store): StoreInterface;
 
     /**
      * @param StoreInterface $store
@@ -29,13 +30,14 @@ interface StoreRepositoryInterface
 
     /**
      * @param int $store_id
+     * @param int|null $storeView_id
      * @return StoreInterface
      */
-    public function getById(int $store_id): StoreInterface;
+    public function getById(int $store_id, int $storeView_id=null): StoreInterface;
 
     /**
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param SearchCriteriaInterface $searchCriteria
      * @return StoreSearchResultInterface
      */
-    public function getList($searchCriteria);
+    public function getList(SearchCriteriaInterface $searchCriteria): StoreSearchResultInterface;
 }
