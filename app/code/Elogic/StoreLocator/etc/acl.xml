@@ -5,10 +5,10 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Elogic_StoreLocator::storelocator" title="StoreLocator" sortOrder="10">
                     <resource id="Elogic_StoreLocator::read" title="Read" translate="title" sortOrder="10"/>
-                    <resource id="Elogic_StoreLocator::write" title="Full access" translate="title" sortOrder="20"/>
                     <resource id="Elogic_StoreLocator::store_config" title="Config" translate="title" sortOrder="30"/>
-                    </resource>
+                    <resource id="Elogic_StoreLocator::write" title="Full access" translate="title" sortOrder="20"/>
                 </resource>
+            </resource>
         </resources>
     </acl>
 </config>

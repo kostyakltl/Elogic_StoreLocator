@@ -15,6 +15,7 @@ use Elogic\StoreLocator\Api\Data\StoreSearchResultInterfaceFactory;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchResultsInterfaceFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Event\ManagerInterface as EventManager;
 use Exception;
 
 /**
@@ -39,6 +40,10 @@ class StoreRepository implements StoreRepositoryInterface
      * @var SearchResultsInterfaceFactory
      */
     private $searchResultFactory;
+    /**
+     * @var EventManager
+     */
+    private $eventManager;
 
     /**
      * @param StoreInterfaceFactory $storeFactory
@@ -50,13 +55,15 @@ class StoreRepository implements StoreRepositoryInterface
         StoreInterfaceFactory $storeFactory,
         Resource $storeResource,
         CollectionFactory $collectionFactory,
-        StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory
+        StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory,
+        EventManager $eventManager
     )
     {
         $this->storeFactory = $storeFactory;
         $this->collectionFactory = $collectionFactory;
         $this->storeResource = $storeResource;
         $this->searchResultFactory = $searchResultsInterfaceFactory;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -66,6 +73,7 @@ class StoreRepository implements StoreRepositoryInterface
      */
     public function save(StoreInterface $store) : StoreInterface
     {
+        $this->eventManager->dispatch('storelocator_store_save_before', ['store' => $store]);
         $this->storeResource->save($store);
         return $store;
     }

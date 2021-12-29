@@ -7,23 +7,20 @@ use Elogic\StoreLocator\Api\Data\StoreInterfaceFactory;
 use Elogic\StoreLocator\Api\StoreRepositoryInterface;
 use Elogic\StoreLocator\Api\Data\StoreAttributeInterfaceFactory;
 use Elogic\StoreLocator\Api\StoreAttributeRepositoryInterface;
-use Elogic\StoreLocator\Api\GeoCoderInterface;
-use Elogic\StoreLocator\Ui\DataProvider\StoreDataProvider;
-use Magento\Catalog\Model\ImageUploader;
 
+use Magento\Catalog\Model\ImageUploader;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Serialize\Serializer\Json;
-use Magento\Store\Model\StoreManagerInterface;
+use function Symfony\Component\String\s;
 
 /**
  * Save store entity controller
  */
 class Save extends Action
 {
-
     /**
      * @var RedirectFactory
      */
@@ -45,10 +42,6 @@ class Save extends Action
      */
     private $json;
     /**
-     * @var GeoCoderInterface
-     */
-    private $geocoder;
-    /**
      * @var StoreAttributeInterfaceFactory
      */
     private $storeAttributeFactory;
@@ -56,10 +49,6 @@ class Save extends Action
      * @var StoreAttributeRepositoryInterface
      */
     private $storeAttributeRepository;
-    /**
-     * @var StoreDataProvider
-     */
-    private $dataProvider;
 
     /**
      * @param Context $context
@@ -68,11 +57,9 @@ class Save extends Action
      * @param StoreRepositoryInterface $storeRepository
      * @param ImageUploader $imageUploader
      * @param Json $json
-     * @param GeoCoderInterface $geoCoder
-     * @param StoreManagerInterface $storeManager
      * @param StoreAttributeInterfaceFactory $storeAttributeInterfaceFactory
      * @param StoreAttributeRepositoryInterface $storeAttributeRepository
-     * @param StoreDataProvider $dataProvider
+     * @param EventManager $eventManager
      */
     public function __construct(
         Context $context,
@@ -81,10 +68,8 @@ class Save extends Action
         StoreRepositoryInterface $storeRepository,
         ImageUploader $imageUploader,
         Json $json,
-        GeoCoderInterface $geoCoder,
         StoreAttributeInterfaceFactory $storeAttributeInterfaceFactory,
-        StoreAttributeRepositoryInterface $storeAttributeRepository,
-        StoreDataProvider $dataProvider
+        StoreAttributeRepositoryInterface $storeAttributeRepository
     )
     {
         parent::__construct($context);
@@ -92,11 +77,9 @@ class Save extends Action
         $this->storeRepository = $storeRepository;
         $this->storeAttributeFactory = $storeAttributeInterfaceFactory;
         $this->storeAttributeRepository = $storeAttributeRepository;
-        $this->geocoder = $geoCoder;
         $this->json = $json;
         $this->imageUploader = $imageUploader;
         $this->redirectFactory = $redirectFactory;
-        $this->dataProvider = $dataProvider;
     }
 
     /**
@@ -119,80 +102,16 @@ class Save extends Action
         $store->setName($data['store_name']);
         $store->setDescription($data['store_description']);
         $store->setAddress($data['store_address']);
+        $store->setUrl($data['store_url_key']);
+        $store->setLatitude($data['store_latitude']);
+        $store->setLongitude($data['store_longitude']);
         $store = $this->setImage($data, $store);
         $store = $this->setSchedule($data, $store);
-        $store = $this->setCoordinates($data, $store);
         $this->storeRepository->save($store);
-        $store = $this->setUrl($data, $store);
         $this->setAttributes($store, $data, $storeId);
 
         $redirectResult->setPath('*/*/index');
         return $redirectResult;
-    }
-
-    /**
-     * @param $data
-     * @param $store
-     * @return mixed
-     * @throws \Exception
-     */
-    public function setUrl($data, $store)
-    {
-        if($data['store_url_key']) {
-            try {
-                $store->setUrl($data['store_url_key']);
-                $this->storeRepository->save($store);
-            } catch (\Exception $exception) {       //unique check
-                $this->messageManager->addErrorMessage(__('Url key is not unique\n Please edit it'));
-            }
-        }
-        else {
-            try {
-                $store->setUrl(str_replace(' ', '-', strtolower($data['store_name'])));
-                $this->storeRepository->save($store);
-            } catch (\Exception $exception) {       //unique check
-                $store->setUrl(str_replace(' ', '-', strtolower($data['store_name']) . '-' . random_int(0, 100)));
-                $this->storeRepository->save($store);
-            }
-        }
-        return $store;
-    }
-
-    /**
-     * @param $data
-     * @param $store
-     * @return mixed
-     */
-    public function setCoordinates($data, $store)
-    {
-        if ($data['store_latitude'] == '' && $data['store_longitude'] == '') {
-            $this->getCoordinates($data['store_address'], $store);
-        } else {
-            $store->setLatitude($data['store_latitude']);
-            $store->setLongitude($data['store_longitude']);
-        }
-        return $store;
-    }
-
-    /**
-     * @param $address
-     * @param $store
-     * @return mixed
-     */
-    public function getCoordinates($address, $store)
-    {
-        $coordinates = $this->geocoder->getCoordinatesByAddress($address);
-        if ($coordinates == 'ErrorApi') {
-            $this->messageManager->addErrorMessage(__('Api key is not correct.'));
-        }
-        elseif ($coordinates[0] == null || $coordinates[1] == null || $coordinates == 'ZERO_RESULTS') {
-            $this->messageManager->addNoticeMessage(__('Address is not correct. Cant define coordinates.'));
-        }
-        else {
-            $store->setLatitude($coordinates[1]);
-            $store->setLongitude($coordinates[0]);
-        }
-        return $store;
     }
 
     /**

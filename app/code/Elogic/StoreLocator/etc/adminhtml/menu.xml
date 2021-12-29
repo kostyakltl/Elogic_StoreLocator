@@ -3,6 +3,6 @@
     <menu>
         <add id="Elogic_StoreLocator::storelocator" title="Store Locator" module="Elogic_StoreLocator" sortOrder="10" resource="Elogic_StoreLocator::storelocator"/>
         <add id="Elogic_StoreLocator::store" title="Stores" module="Elogic_StoreLocator" sortOrder="50" parent="Elogic_StoreLocator::storelocator" action="storelocator/store/index" resource="Elogic_StoreLocator::storelocator"/>
-        <add id="Elogic_StoreLocator::config" title="Configuration" module="Elogic_StoreLocator" sortOrder="99" parent="Elogic_StoreLocator::storelocator" action="adminhtml/system_config/edit/section/storelocator" resource="Elogic_StoreLocator::storelocator"/>
+        <add id="Elogic_StoreLocator::config" title="Configuration" module="Elogic_StoreLocator" sortOrder="99" parent="Elogic_StoreLocator::storelocator" action="adminhtml/system_config/edit/section/storelocator" resource="Elogic_StoreLocator::store_config"/>
     </menu>
 </config>

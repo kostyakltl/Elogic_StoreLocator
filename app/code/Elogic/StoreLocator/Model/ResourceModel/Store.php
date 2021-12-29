@@ -41,6 +41,22 @@ class Store extends AbstractDb
         return $this->getConnection()->fetchOne($select);
     }
 
+    public function checkUniqueUrl($url)
+    {
+        $select = $this->getConnection()->select()
+            ->from([self::ENTITY_TABLE_NAME])
+            ->where(StoreInterface::STORE_URL_KEY . '= ?', $url);
+//
+//        $select->reset(Select::COLUMNS)
+//            ->columns(StoreInterface::STORE_ID)
+//            ->limit(1);
+
+        if($this->getConnection()->fetchOne($select) == false) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param $url
      * @return Select

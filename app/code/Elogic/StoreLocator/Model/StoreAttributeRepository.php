@@ -41,8 +41,9 @@ class StoreAttributeRepository implements StoreAttributeRepositoryInterface
         $this->storeManager = $storeManager;
     }
 
+
     /**
-     * @param StoreAttributeInterface $storeAttribute
+     * @param $storeAttribute
      * @return StoreAttributeInterface
      * @throws AlreadyExistsException
      */

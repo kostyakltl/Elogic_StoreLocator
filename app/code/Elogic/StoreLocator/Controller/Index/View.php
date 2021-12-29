@@ -52,13 +52,11 @@ class View implements HttpGetActionInterface
     public function execute()
     {
         $page = $this->pageFactory->create();
-
         if($this->configProvider->isModuleEnable() ==  false) {
             return $this->redirectFactory->create()->setUrl('/');
-
         }
-        $store = $this->request->getParam('store');
 
+        $store = $this->request->getParam('store');
         if(!$store) {
             return $this->redirectFactory->create()->setPath('/');
         }

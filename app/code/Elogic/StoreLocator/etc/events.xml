@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="storelocator_store_save_before">
+        <observer name="storelocator_store_save_coordinates_observer" instance="Elogic\StoreLocator\Observer\SaveCoordinates"/>
+        <observer name="storelocator_store_save_url_observer" instance="Elogic\StoreLocator\Observer\SaveUrl"/>
+    </event>
+</config>
