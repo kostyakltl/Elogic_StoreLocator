@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elogic\StoreLocator\Api\Data;
 
 /**
@@ -16,7 +18,7 @@ interface StoreAttributeInterface
     /**
      * attribute`s id
      * 1    -   name
-     * 2    -   shcedule
+     * 2    -   schedule
      */
     const ATTRIBUTE_ID = 'store_attribute_id';
 
@@ -36,7 +38,9 @@ interface StoreAttributeInterface
     const SCOPE_ID = 'store_id';
 
 
-
+    /**
+     * @return mixed
+     */
     public function getId();
 
     /**
@@ -66,6 +70,9 @@ interface StoreAttributeInterface
     public function setValue(string $value) : StoreAttributeInterface;
 
 
+    /**
+     * @return mixed
+     */
     public function getStoreEntityId();
 
     /**

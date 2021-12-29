@@ -20,7 +20,7 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
     }
 
     /**
-     * @return array|mixed|null
+     * @return int
      */
     public function getId()
     {
@@ -30,7 +30,7 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
 
     /**
      * @param int $value_id
-     * @return StoreAttributeInterface|mixed
+     * @return StoreAttributeInterface
      */
     public function setID($value_id) : StoreAttributeInterface
     {
@@ -75,13 +75,12 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
     }
 
     /**
-     * @return array|mixed|null
+     * @return int
      */
     public function getStoreEntityId()
     {
         return $this->getData(self::ENTITY_ID);
     }
-
 
     /**
      * @param int $entity_id

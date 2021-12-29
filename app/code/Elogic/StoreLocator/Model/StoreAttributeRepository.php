@@ -58,7 +58,7 @@ class StoreAttributeRepository implements StoreAttributeRepositoryInterface
             $storeList = $this->storeManager->getStores($withDefault= true);
             foreach ($storeList as $item) {
                 $storeAttributeNew = $this->storeAttributeFactory->create();
-                $storeAttributeNew->setScopeId($storeId = $item->getId());
+                $storeAttributeNew->setScopeId($item->getId());
                 $storeAttributeNew->setAttrId($storeAttribute->getAttrId());
                 $storeAttributeNew->setValue($storeAttribute->getValue());
                 $storeAttributeNew->setStoreEntityId($storeAttribute->getStoreEntityId());

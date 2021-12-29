@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elogic\StoreLocator\Api;
 
 use Elogic\StoreLocator\Api\Data\StoreInterface;

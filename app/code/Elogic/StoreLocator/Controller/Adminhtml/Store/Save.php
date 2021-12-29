@@ -119,11 +119,11 @@ class Save extends Action
         $store->setName($data['store_name']);
         $store->setDescription($data['store_description']);
         $store->setAddress($data['store_address']);
-        $this->setImage($data, $store);
-        $this->setSchedule($data, $store);
-        $this->setCoordinates($data, $store);
+        $store = $this->setImage($data, $store);
+        $store = $this->setSchedule($data, $store);
+        $store = $this->setCoordinates($data, $store);
         $this->storeRepository->save($store);
-        $this->setUrl($data, $store);
+        $store = $this->setUrl($data, $store);
         $this->setAttributes($store, $data, $storeId);
 
         $redirectResult->setPath('*/*/index');
@@ -236,16 +236,7 @@ class Save extends Action
      */
     public function setAttributes($store, $data, $storeId)
     {
-        $storeAttribute = $this->storeAttributeFactory->create();
         $entityId = $store->getId();
-        $attrlist = $storeAttribute->getAttributes();
-        foreach ($data as $item) {
-            foreach ($attrlist as $attr) {
-                if ($item == $attr) {
-                    $attributeId = $storeAttribute->resource->getAttributeIdByCode($attr);
-                }
-            }
-        }
         if (sizeof($storeId) > 1) {
             foreach ($storeId as $item) {
                 $storeId = $item;

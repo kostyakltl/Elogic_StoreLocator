@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elogic\StoreLocator\Model;
 
 use Elogic\StoreLocator\Api\Data\StoreInterface;
@@ -11,7 +13,6 @@ use Elogic\StoreLocator\Api\StoreRepositoryInterface;
 use Elogic\StoreLocator\Api\Data\StoreSearchResultInterface;
 use Elogic\StoreLocator\Api\Data\StoreSearchResultInterfaceFactory;
 
-use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchResultsInterfaceFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Exception;
@@ -19,7 +20,7 @@ use Exception;
 /**
  *
  */
-class   StoreRepository implements StoreRepositoryInterface
+class StoreRepository implements StoreRepositoryInterface
 {
 
     /**
@@ -34,12 +35,6 @@ class   StoreRepository implements StoreRepositoryInterface
      * @var CollectionFactory
      */
     private $collectionFactory;
-
-    /**
-     * @var CollectionProcessorInterface
-     */
-    private $collectionProcessor;
-
     /**
      * @var SearchResultsInterfaceFactory
      */
@@ -56,15 +51,13 @@ class   StoreRepository implements StoreRepositoryInterface
         StoreInterfaceFactory $storeFactory,
         Resource $storeResource,
         CollectionFactory $collectionFactory,
-        StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory,
-        CollectionProcessorInterface $collectionProcessor
+        StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory
     )
     {
         $this->storeFactory = $storeFactory;
         $this->collectionFactory = $collectionFactory;
         $this->storeResource = $storeResource;
         $this->searchResultFactory = $searchResultsInterfaceFactory;
-        $this->collectionProcessor = $collectionProcessor;
     }
 
     /**
@@ -108,8 +101,6 @@ class   StoreRepository implements StoreRepositoryInterface
     {
         $store = $this->storeFactory->create();
         $this->storeResource->load($store, $store_id);
-//        $store->setData('store_view_id', $storeView_id);
-//        $store->setName(($store->getName()));
         return $store;
     }
 
@@ -127,7 +118,6 @@ class   StoreRepository implements StoreRepositoryInterface
                 $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
             }
         }
-
         /** @var StoreSearchResultInterface $searchResult */
         $searchResult = $this->searchResultFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
