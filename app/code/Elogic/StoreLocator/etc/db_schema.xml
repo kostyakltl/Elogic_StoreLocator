@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="elogic_store_entity" resource="default" engine="innodb" comment="Entity table">
+        <column xsi:type="smallint" name="store_entity_id" padding="6" unsigned="true" nullable="false" identity="true" comment="Store entity ID"/>
+        <column xsi:type="varchar" name="store_address" length="255" nullable="true" comment="Address"/>
+        <column xsi:type="varchar" name="store_latitude" comment="Latitude format ##,######"/>
+        <column xsi:type="varchar" name="store_longitude" comment="Latitude format ###,######"/>
+        <column xsi:type="varchar" name="store_image" nullable="true" length="255" comment="Image"/>
+        <column xsi:type="varchar" name="store_description" nullable="false" length="255" comment="Description"/>
+        <column xsi:type="varchar" name="store_url_key" comment="Url key"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="store_entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="UNIQUE">
+            <column name="store_url_key"/>
+        </constraint>
+    </table>
+
+    <table name="elogic_store_attribute" resource="default" engine="innodb" comment="Attribute table">
+        <column xsi:type="smallint" name="store_attribute_id" padding="6" unsigned="true"  nullable="false" identity="true" comment="Attribute ID"/>
+        <column xsi:type="varchar" name="store_attribute_code" length="255" nullable="false" comment="Attribute code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="store_attribute_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="UNIQUE">
+            <column name="store_attribute_code"/>
+        </constraint>
+    </table>
+
+    <table name="elogic_store_value" resource="default" engine="innodb" comment="Value table">
+        <column xsi:type="smallint" name="store_value_id" padding="6" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="smallint" name="store_entity_id" padding="6" unsigned="true" nullable="true" comment="Entity ID"/>
+        <column xsi:type="smallint" name="store_attribute_id" padding="6" unsigned="true" nullable="true" comment="Attribute ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" comment="Store ID"/>
+        <column xsi:type="varchar" name="value" length="255" nullable="true" comment="Value of attribute"/>
+        <constraint xsi:type="foreign"  referenceId="ELOGIC_STORE_VAL_STORE_ENTT_ID_ELOGIC_STORE_ENTT_STORE_ENTT_ID" column="store_entity_id"
+                    table="elogic_store_value" referenceColumn="store_entity_id" referenceTable="elogic_store_entity" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="ELOGIC_STORE_VAL_STORE_ATTR_ID_ELOGIC_STORE_ATTR_STORE_ATTR_ID" column="store_attribute_id"
+                    table="elogic_store_value" referenceColumn="store_attribute_id" referenceTable="elogic_store_attribute" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="ELOGIC_STORE_VALUE_STORE_ID_STORE_STORE_ID" column="store_id"
+                    table="elogic_store_value" referenceColumn="store_id" referenceTable="store" onDelete="CASCADE"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="store_value_id"/>
+        </constraint>
+    </table>
+</schema>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/storelocator/store" method="POST">
+        <service class="Elogic\StoreLocator\Api\StoreRepositoryInterface" method="save"/>
+            <resources>
+                <resource ref="anonymous"/>
+            </resources>
+    </route>
+    <route url="/V1/storelocator/store" method="GET">
+        <service class="Elogic\StoreLocator\Api\StoreRepositoryInterface" method="getList"/>
+            <resources>
+                <resource ref="anonymous"/>
+            </resources>
+    </route>
+    <route url="/V1/storelocator/store/:id" method="GET">
+        <service class="Elogic\StoreLocator\Api\StoreRepositoryInterface" method="getById"/>
+            <resources>
+                <resource ref="anonymous"/>
+            </resources>
+    </route>
+    <route url="/V1/storelocator/store/:id" method="DELETE">
+        <service class="Elogic\StoreLocator\Api\StoreRepositoryInterface" method="deleteById"/>
+            <resources>
+                <resource ref="anonymous"/>
+            </resources>
+    </route>
+    <route url="/V1/storelocator/store" method="DELETE">
+        <service class="Elogic\StoreLocator\Api\StoreRepositoryInterface" method="delete"/>
+            <resources>
+                <resource ref="anonymous"/>
+            </resources>
+    </route>
+    <route url="/V1/storelocator/store/:id" method="PUT">
+        <service class="Elogic\StoreLocator\Api\StoreRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>
+
+
