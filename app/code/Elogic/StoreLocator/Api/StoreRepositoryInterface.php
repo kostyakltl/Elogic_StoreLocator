@@ -20,13 +20,13 @@ interface StoreRepositoryInterface
      * @param StoreInterface $store
      * @return void
      */
-    public function delete(StoreInterface $store);
+    public function delete(StoreInterface $store) : void;
 
     /**
      * @param int $store_id
      * @return void
      */
-    public function deleteById(int $store_id);
+    public function deleteById(int $store_id) : void;
 
     /**
      * @param int $store_id

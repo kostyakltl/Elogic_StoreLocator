@@ -75,7 +75,7 @@ class StoreRepository implements StoreRepositoryInterface
      * @return void
      * @throws Exception
      */
-    public function delete(StoreInterface $store)
+    public function delete(StoreInterface $store) : void
     {
         $this->storeResource->delete($store);
     }
@@ -85,7 +85,7 @@ class StoreRepository implements StoreRepositoryInterface
      * @return void
      * @throws Exception
      */
-    public function deleteById(int $store_id)
+    public function deleteById(int $store_id) : void
     {
         $store = $this->getById($store_id);
         $this->delete($store);
