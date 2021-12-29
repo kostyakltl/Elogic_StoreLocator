@@ -7,16 +7,11 @@ use Elogic\StoreLocator\Api\Data\StoreAttributeInterfaceFactory;
 use Elogic\StoreLocator\Api\Data\StoreAttributeInterface;
 use Elogic\StoreLocator\Model\ResourceModel\StoreAttribute as ResourceModel;
 use Magento\Store\Model\StoreManagerInterface;
-use Exception;
 use Magento\Framework\Exception\AlreadyExistsException;
+use Exception;
 
-/**
- *
- */
 class StoreAttributeRepository implements StoreAttributeRepositoryInterface
 {
-
-
     /**
      * @var ResourceModel
      */
@@ -39,7 +34,6 @@ class StoreAttributeRepository implements StoreAttributeRepositoryInterface
         ResourceModel $storeAttributeResource,
         StoreAttributeInterfaceFactory $storeAttributeFactory,
         StoreManagerInterface $storeManager
-
     )
     {
         $this->storeAttributeResource = $storeAttributeResource;

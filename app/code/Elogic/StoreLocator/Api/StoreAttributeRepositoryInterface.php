@@ -11,7 +11,7 @@ interface StoreAttributeRepositoryInterface
 {
 
     /**
-     * @param StoreAttributeInterface $store
+     * @param StoreAttributeInterface $storeAttribute
      * @return StoreAttributeInterface
      */
     public function save($storeAttribute) : StoreAttributeInterface;
@@ -33,5 +33,4 @@ interface StoreAttributeRepositoryInterface
      * @return StoreAttributeInterface
      */
     public function getById(int $attributeId) : StoreAttributeInterface;
-
 }
