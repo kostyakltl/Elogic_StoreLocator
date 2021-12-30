@@ -274,17 +274,6 @@
                 <dataType>number</dataType>
             </settings>
         </field>
-<!--        <field name="store_view_id" formElement="hidden">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="source" xsi:type="string">store</item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--            <settings>-->
-<!--                <dataType>hidden</dataType>-->
-<!--                <dataScope>store_id</dataScope>-->
-<!--            </settings>-->
-<!--        </field>-->
         <field name="storeviews" formElement="multiselect">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
