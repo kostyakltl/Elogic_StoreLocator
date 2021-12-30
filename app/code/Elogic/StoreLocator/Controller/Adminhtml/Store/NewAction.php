@@ -16,7 +16,6 @@ class NewAction extends Action implements HttpGetActionInterface
      */
     protected $forwardFactory;
 
-
     /**
      * @param Action\Context $context
      * @param ForwardFactory $forwardFactory
@@ -24,8 +23,7 @@ class NewAction extends Action implements HttpGetActionInterface
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         ForwardFactory $forwardFactory
-    )
-    {
+    ) {
         $this->forwardFactory = $forwardFactory;
         parent::__construct($context);
     }

@@ -35,8 +35,7 @@ class Index extends Action
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         GeoCoder $geoCoder,
         ConfigProvider $configProvider
-    )
-    {
+    ) {
         $this->configProvider = $configProvider;
         $this->geoCoder = $geoCoder;
         parent::__construct($context);
@@ -52,17 +51,13 @@ class Index extends Action
     {
         $resultPage = $this->resultPageFactory->create();
 
-        if(!$this->configProvider->isModuleEnable()) {
+        if (!$this->configProvider->isModuleEnable()) {
             return __('Module is disabled');
-        }
-        else {
-
-        $resultPage->setActiveMenu('Elogic_StoreLocator::storelocator');
-        $resultPage->getConfig()->getTitle()->set(__("Stores"));
-        $resultPage->getConfig()->getTitle()->prepend(__('Stores'));
-        return $resultPage;
+        } else {
+            $resultPage->setActiveMenu('Elogic_StoreLocator::storelocator');
+            $resultPage->getConfig()->getTitle()->set(__("Stores"));
+            $resultPage->getConfig()->getTitle()->prepend(__('Stores'));
+            return $resultPage;
         }
     }
-
-
 }

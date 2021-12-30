@@ -9,10 +9,6 @@ use Magento\Ui\Component\MassAction\Filter;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\App\Action;
 
-
-/**
- *
- */
 class MassDelete extends Action
 {
 
@@ -48,7 +44,6 @@ class MassDelete extends Action
         $this->collectionFactory = $collectionFactory;
         $this->storeRepository = $storeRepository;
     }
-
 
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void

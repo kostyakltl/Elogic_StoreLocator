@@ -38,7 +38,7 @@ interface StoreAttributeInterface
     const SCOPE_ID = 'store_id';
 
     /**
-     * @return mixed
+     * @return int|string
      */
     public function getId();
 
@@ -84,13 +84,13 @@ interface StoreAttributeInterface
     /**
      * @return int
      */
-    public function getScopeId() : int;
+    public function getScopeId();
 
     /**
-     * @param int $scope_id
+     * @param int|string $scope_id
      * @return StoreAttributeInterface
      */
-    public function setScopeId(int $scope_id) : StoreAttributeInterface;
+    public function setScopeId($scope_id) : StoreAttributeInterface;
 
     /**
      * @param int $storeEntityId

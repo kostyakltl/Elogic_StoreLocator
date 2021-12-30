@@ -8,7 +8,6 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\Result\RedirectFactory;
 
-
 class Delete extends Action
 {
     protected $resultFactory;
@@ -21,8 +20,7 @@ class Delete extends Action
         StoreInterfaceFactory $storeFactory,
         StoreRepositoryInterface $storeRepository,
         RedirectFactory $resultRedirectFactory
-    )
-    {
+    ) {
         $this->resultFactory = $resultRedirectFactory;
         $this->storeRepository = $storeRepository;
         $this->storeFactory = $storeFactory;
@@ -40,6 +38,5 @@ class Delete extends Action
         $result->setPath('storelocator/store/index');
 
         return $result;
-
     }
 }

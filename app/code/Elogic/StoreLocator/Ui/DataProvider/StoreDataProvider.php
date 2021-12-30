@@ -15,7 +15,6 @@ use Magento\Ui\DataProvider\ModifierPoolDataProvider;
 
 /**
  * Class StoreDataProvider
- * @package Elogic\Store\Ui\DataProvider
  */
 class StoreDataProvider extends ModifierPoolDataProvider
 {
@@ -33,8 +32,6 @@ class StoreDataProvider extends ModifierPoolDataProvider
      * @var DataPersistorInterface
      */
     private $dataPersistor;
-
-    private $registry;
 
     /**
      * @var StoreManagerInterface
@@ -81,7 +78,6 @@ class StoreDataProvider extends ModifierPoolDataProvider
         $this->json = $json;
         $this->request = $request;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-
     }
 
     /**
@@ -107,11 +103,6 @@ class StoreDataProvider extends ModifierPoolDataProvider
                     ]
                 ]);
             }
-            $schedule = $store->getSchedule();
-//            if ($schedule !== null)
-//                $store->setSchedule($this->json->unserialize($schedule));
-//            else
-//                $store->setSchedule([]);
             $name = $store->getName();
             if ($name == 'WARNING: No set name for this store view')
                 $store->setName("");

@@ -7,7 +7,8 @@
             "store_longitude": true,
             "store_image": true,
             "store_description": true,
-            "store_url_key": true
+            "store_url_key": true,
+            "store_name": true
         },
         "constraint": {
             "PRIMARY": true,

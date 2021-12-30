@@ -20,9 +20,9 @@ interface StoreInterface
     const STORE_URL_KEY                     = 'store_url_key';
 
     /**
-     * @return int
+     * @return int|string
      */
-    public function getId(): int;
+    public function getId();
 
     /**
      * @param int $store_id
@@ -31,9 +31,9 @@ interface StoreInterface
     public function setId(int $store_id): StoreInterface;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string;
+    public function getName(): ?string;
 
     /**
      * @param string $store_name
@@ -42,9 +42,9 @@ interface StoreInterface
     public function setName(string $store_name): StoreInterface;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription() :string;
+    public function getDescription() :?string;
 
     /**
      * @param string $store_description

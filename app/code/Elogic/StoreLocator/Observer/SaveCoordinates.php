@@ -34,7 +34,7 @@ class SaveCoordinates implements ObserverInterface
             if ($data['store_latitude'] !== "" || $data['store_longitude'] !== "") {
                 return $store;
             }
-        } finally {
+        } catch (\Exception $exception) {
             $address = $store->getAddress();
             $coordinates = $this->geoCoder->getCoordinatesByAddress($address);
             $store->setLatitude($coordinates[1]);

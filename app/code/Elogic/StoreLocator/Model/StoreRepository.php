@@ -12,6 +12,7 @@ use Elogic\StoreLocator\Api\StoreRepositoryInterface;
 use Elogic\StoreLocator\Api\Data\StoreSearchResultInterface;
 use Elogic\StoreLocator\Api\Data\StoreSearchResultInterfaceFactory;
 
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchResultsInterfaceFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
@@ -42,24 +43,32 @@ class StoreRepository implements StoreRepositoryInterface
     private $eventManager;
 
     /**
+     * @var CollectionProcessorInterface
+     */
+    private $collectionProcessor;
+
+    /**
      * @param StoreInterfaceFactory $storeFactory
      * @param Resource $storeResource
      * @param CollectionFactory $collectionFactory
      * @param StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory
      * @param EventManager $eventManager
+     * @param CollectionProcessorInterface $collectionProcessor
      */
     public function __construct(
         StoreInterfaceFactory $storeFactory,
         Resource $storeResource,
         CollectionFactory $collectionFactory,
         StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory,
-        EventManager $eventManager
+        EventManager $eventManager,
+        CollectionProcessorInterface $collectionProcessor
     ) {
         $this->storeFactory = $storeFactory;
         $this->collectionFactory = $collectionFactory;
         $this->storeResource = $storeResource;
         $this->searchResultFactory = $searchResultsInterfaceFactory;
         $this->eventManager = $eventManager;
+        $this->collectionProcessor = $collectionProcessor;
     }
 
     /**
@@ -114,13 +123,7 @@ class StoreRepository implements StoreRepositoryInterface
     public function getList(SearchCriteriaInterface $searchCriteria) : StoreSearchResultInterface
     {
         $collection = $this->collectionFactory->create();
-        foreach ($searchCriteria->getFilterGroups() as $filterGroup) {
-            foreach ($filterGroup->getFilters() as $filter) {
-                $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
-                $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
-            }
-        }
-        /** @var StoreSearchResultInterface $searchResult */
+        $this->collectionProcessor->process($searchCriteria, $collection);
         $searchResult = $this->searchResultFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setItems($collection->getItems());

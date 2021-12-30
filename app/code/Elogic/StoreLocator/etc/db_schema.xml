@@ -8,6 +8,7 @@
         <column xsi:type="varchar" name="store_image" nullable="true" length="255" comment="Image"/>
         <column xsi:type="varchar" name="store_description" nullable="false" length="255" comment="Description"/>
         <column xsi:type="varchar" name="store_url_key" comment="Url key"/>
+        <column xsi:type="varchar" name="store_name" comment="Store name for default store view"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="store_entity_id"/>
         </constraint>

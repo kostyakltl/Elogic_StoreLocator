@@ -24,9 +24,9 @@ class Store extends AbstractModel implements StoreInterface
     }
 
     /**
-     * @return int
+     * @return int|string
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->getData(self::STORE_ID);
     }
@@ -42,9 +42,9 @@ class Store extends AbstractModel implements StoreInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->getData(self::STORE_NAME);
     }

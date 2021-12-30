@@ -22,9 +22,9 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
     }
 
     /**
-     * @return int
+     * @return int|string
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->getData(self::ID);
     }
@@ -94,18 +94,18 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
     }
 
     /**
-     * @return int
+     * @return int|string
      */
-    public function getScopeId() : int
+    public function getScopeId()
     {
         return $this->getData(self::SCOPE_ID);
     }
 
     /**
-     * @param int $scope_id
+     * @param int|string $scope_id
      * @return StoreAttributeInterface
      */
-    public function setScopeId(int $scope_id): StoreAttribute
+    public function setScopeId($scope_id): StoreAttribute
     {
         $this->setData(self::SCOPE_ID, $scope_id);
         return $this;
@@ -115,9 +115,9 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
      * @param int $storeEntityId
      * @param int $storeId
      * @param string $attributeCode
-     * @return string|null
+     * @return string|array|null
      */
-    public function getAttributeValue(int $storeEntityId, int $storeId, string $attributeCode): ?string
+    public function getAttributeValue(int $storeEntityId, int $storeId, string $attributeCode)
     {
         return $this->_resource->getAttributeValue($storeEntityId, $storeId, $attributeCode);
     }
