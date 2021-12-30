@@ -1,0 +1,78 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Elogic\StoreLocator\Api\Data\StoreInterface" type="Elogic\StoreLocator\Model\Store"/>
+    <preference for="Elogic\StoreLocator\Api\StoreRepositoryInterface" type="Elogic\StoreLocator\Model\StoreRepository"/>
+    <preference for="Elogic\StoreLocator\Api\Data\StoreAttributeInterface" type="Elogic\StoreLocator\Model\StoreAttribute"/>
+    <preference for="Elogic\StoreLocator\Api\StoreAttributeRepositoryInterface" type="Elogic\StoreLocator\Model\StoreAttributeRepository"/>
+    <preference for="Elogic\StoreLocator\Api\Data\StoreSearchResultInterface" type="Elogic\StoreLocator\Model\StoreSearchResult"/>
+    <preference for="Elogic\StoreLocator\Api\GeoCoderInterface" type="Elogic\StoreLocator\Model\Source\GeoCoder"/>
+    <virtualType name="Elogic\StoreLocator\Model\ImageUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">elogic/temp_base_path</argument>
+            <argument name="basePath" xsi:type="string">elogic/base_path</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="gif" xsi:type="string">gif</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Elogic\StoreLocator\Model\ResourceModel\Store\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">elogic_store_entity</argument>
+            <argument name="resourceModel" xsi:type="string">Elogic\StoreLocator\Model\ResourceModel\Store</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Elogic\StoreLocator\Controller\Adminhtml\Store\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Elogic\StoreLocator\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Elogic\StoreLocator\Controller\Adminhtml\Store\Save">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Elogic\StoreLocator\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="storelocator_store_listing_data_source" xsi:type="string">Elogic\StoreLocator\Model\ResourceModel\Store\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+<!--    <type name="Magento\Framework\Console\CommandListInterface">-->
+<!--        <arguments>-->
+<!--            <argument name="name" xsi:type="string">import:store:csv</argument>-->
+<!--            <argument name="commands" xsi:type="array">-->
+<!--                <item name="import:store:csv" xsi:type="object">Elogic\StoreLocator\Console\Command\ImportCSV</item>-->
+<!--            </argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
+
+    <type name="Elogic\StoreLocator\Api\Data\StoreInterface">
+        <arguments>
+            <argument name="resource" xsi:type="object">Elogic\StoreLocator\Model\ResourceModel\Store</argument>
+        </arguments>
+    </type>
+    <type name="Elogic\StoreLocator\Api\Data\StoreAttributeInterface">
+        <arguments>
+            <argument name="resource" xsi:type="object">Elogic\StoreLocator\Model\ResourceModel\StoreAttribute</argument>
+        </arguments>
+    </type>
+
+            <!--    plugins  -->
+    <type name="Elogic\StoreLocator\Model\Store">
+        <plugin name="AttributesGetter" type="Elogic\StoreLocator\Plugin\StoreAttributesGetter" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Elogic\StoreLocator\Model\StoreAttributeRepository">
+        <plugin name="StoreAttributeRepositoryPlugin" type="Elogic\StoreLocator\Plugin\StoreAttributeRepositoryPlugin" sortOrder="10" disabled="false"/>
+    </type>
+</config>
