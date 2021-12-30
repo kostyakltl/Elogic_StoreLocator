@@ -108,9 +108,9 @@ interface StoreInterface
     public function setLatitude(string $store_latitude): StoreInterface;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl(): string;
+    public function getUrl(): ?string;
 
     /**
      * @param string $store_url_key

@@ -168,9 +168,9 @@ class Store extends AbstractModel implements StoreInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->getData(self::STORE_URL_KEY);
     }

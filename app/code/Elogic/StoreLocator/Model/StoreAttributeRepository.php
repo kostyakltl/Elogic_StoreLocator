@@ -49,18 +49,18 @@ class StoreAttributeRepository implements StoreAttributeRepositoryInterface
      */
     public function save(StoreAttributeInterface $storeAttribute) : StoreAttributeInterface
     {
-        if ($storeAttribute->getScopeId() == 0) { //if scope id = 0 - save for all store views
-            $storeList = $this->storeManager->getStores($withDefault= true);
-            foreach ($storeList as $item) {
-                $storeAttributeNew = $this->storeAttributeFactory->create();
-                $storeAttributeNew->setScopeId($item->getId());
-                $storeAttributeNew->setAttrId($storeAttribute->getAttrId());
-                $storeAttributeNew->setValue($storeAttribute->getValue());
-                $storeAttributeNew->setStoreEntityId($storeAttribute->getStoreEntityId());
-                $this->storeAttributeResource->save($storeAttributeNew);
-            }
-            return $storeAttribute;
-        }
+//        if ($storeAttribute->getScopeId() == 0) { //if scope id = 0 - save for all store views
+//            $storeList = $this->storeManager->getStores($withDefault= true);
+//            foreach ($storeList as $item) {
+//                $storeAttributeNew = $this->storeAttributeFactory->create();
+//                $storeAttributeNew->setScopeId($item->getId());
+//                $storeAttributeNew->setAttrId($storeAttribute->getAttrId());
+//                $storeAttributeNew->setValue($storeAttribute->getValue());
+//                $storeAttributeNew->setStoreEntityId($storeAttribute->getStoreEntityId());
+//                $this->storeAttributeResource->save($storeAttributeNew);
+//            }
+//            return $storeAttribute;
+//        }
         $this->storeAttributeResource->save($storeAttribute);
         return $storeAttribute;
     }

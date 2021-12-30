@@ -30,6 +30,9 @@ class SaveUrl implements ObserverInterface
     {
         $store = $observer->getData('store');
         $data = $store->getData();
+        if (!array_key_exists('store_name', $data)) {
+            return $store;
+        }
         try {
             $url = $data['store_url_key'];
             if ($url !== "") {

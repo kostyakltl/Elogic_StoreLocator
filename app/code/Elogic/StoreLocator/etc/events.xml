@@ -3,4 +3,7 @@
         <observer name="storelocator_store_save_coordinates_observer" instance="Elogic\StoreLocator\Observer\SaveCoordinates"/>
         <observer name="storelocator_store_save_url_observer" instance="Elogic\StoreLocator\Observer\SaveUrl"/>
     </event>
+    <event name="storelocator_store_save_after">
+        <observer name="storelocator_store_save_attributes_observer" instance="Elogic\StoreLocator\Observer\SaveAttributes"/>
+    </event>
 </config>

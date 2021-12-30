@@ -80,6 +80,7 @@ class StoreRepository implements StoreRepositoryInterface
     {
         $this->eventManager->dispatch('storelocator_store_save_before', ['store' => $store]);
         $this->storeResource->save($store);
+        $this->eventManager->dispatch('storelocator_store_save_after', ['store' => $store]);
         return $store;
     }
 
