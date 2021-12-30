@@ -56,7 +56,6 @@ class Edit extends Action
         $this->storeManager = $storeManager;
     }
 
-
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface|\Magento\Framework\View\Result\Page
      * @throws \Magento\Framework\Exception\NoSuchEntityException
