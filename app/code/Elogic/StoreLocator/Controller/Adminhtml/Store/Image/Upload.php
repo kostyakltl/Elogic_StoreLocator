@@ -24,8 +24,7 @@ class Upload extends Action
         StoreManagerInterface $storeManager,
         FileSystem $fileSystem,
         ImageUploader $imageUploader
-    )
-    {
+    ) {
         $this->imageUploader = $imageUploader;
         $this->storeManager = $storeManager;
         $this->fileSystem = $fileSystem;
@@ -41,6 +40,5 @@ class Upload extends Action
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }
         return $this->resultFactory->create(ResultFactory::TYPE_JSON)->setData($result);
-
     }
 }

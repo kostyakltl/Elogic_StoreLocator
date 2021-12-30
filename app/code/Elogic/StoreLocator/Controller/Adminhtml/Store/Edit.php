@@ -4,7 +4,6 @@ namespace Elogic\StoreLocator\Controller\Adminhtml\Store;
 
 use Elogic\StoreLocator\Api\StoreRepositoryInterface;
 use Elogic\StoreLocator\Api\Data\StoreInterfaceFactory;
-use Elogic\StoreLocator\Model\ConfigProvider;
 use Magento\Backend\App\Action;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Store\Model\StoreManagerInterface;
@@ -49,8 +48,7 @@ class Edit extends Action
         StoreRepositoryInterface $storeRepository,
         StoreManagerInterface $storeManager,
         PageFactory $resultPageFactory
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->storeRepository = $storeRepository;
         $this->storeFactory = $storeInterfaceFactory;
@@ -70,9 +68,9 @@ class Edit extends Action
         $this->storeManager->setCurrentStore($storeView->getCode());
 
         $storeId = $this->getRequest()->getParam('store_entity_id');
-        if($storeId) {
+        if ($storeId) {
             $store = $this->storeRepository->getById($storeId, $storeViewId);
-            if(!$store->getId()) {
+            if (!$store->getId()) {
                 $this->messageManager->addErrorMessage(__('No store with that id'));
                 $resultRedirect = $this->resultRedirectFactory->create();
                 return $resultRedirect->setPath('*/*/');

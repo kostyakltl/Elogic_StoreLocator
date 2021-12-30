@@ -63,7 +63,6 @@ class SaveAttributes implements ObserverInterface
             if ($this->attributeResource->checkUnique($attr) == null) {
                 $this->storeAttributeRepository->save($attr);
             }
-            $this->storeAttributeRepository->save($attr);
         }
     }
 }

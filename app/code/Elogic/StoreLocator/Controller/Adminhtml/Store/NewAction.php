@@ -28,7 +28,6 @@ class NewAction extends Action implements HttpGetActionInterface
         parent::__construct($context);
     }
 
-
     /**
      * @return \Magento\Backend\Model\View\Result\Forward|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
      */
