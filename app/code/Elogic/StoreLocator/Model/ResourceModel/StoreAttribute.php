@@ -39,7 +39,6 @@ class StoreAttribute extends AbstractDb
             ->from('elogic_store_attribute')
             ->columns('store_attribute_code');
 
-//        return $this->getConnection()->fetchAll($select);
         return $this->getConnection()->fetchPairs($select);
     }
 
@@ -58,8 +57,7 @@ class StoreAttribute extends AbstractDb
             ->from([self::VALUE_TABLE_NAME])
             ->where(StoreAttributeInterface::ENTITY_ID. ' =?', $entityId)
             ->where(StoreAttributeInterface::SCOPE_ID . '= ?', $storeId)
-            ->where(StoreAttributeInterface::ATTRIBUTE_ID . '=?', $attributeId
-            );
+            ->where(StoreAttributeInterface::ATTRIBUTE_ID . '=?', $attributeId);
 
         $select->reset(Select::COLUMNS)
             ->columns('value')
@@ -77,7 +75,7 @@ class StoreAttribute extends AbstractDb
     {
         $select = $this->getConnection()->select()
             ->from(self::ATTRIBUTE_TABLE_NAME)
-            ->where('store_attribute_code = ?' , $attributeCode);
+            ->where('store_attribute_code = ?', $attributeCode);
         $select->reset(Select::COLUMNS)
             ->columns('store_attribute_id')
             ->limit(1);
@@ -86,19 +84,18 @@ class StoreAttribute extends AbstractDb
     }
 
     /**
-     * If in attributes value table exist field with same parameters this function return that
+     * If in attributes value table exist field with same parameters this function return it
      * @param StoreAttributeInterface $storeAttribute
      * @return array|null
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function _checkUnique($storeAttribute)
+    public function checkUnique($storeAttribute)
     {
         $select = $this->getConnection()->select()
             ->from($this->getMainTable())
             ->where(StoreAttributeInterface::ATTRIBUTE_ID . '=?', $storeAttribute->getAttrId())
             ->where(StoreAttributeInterface::ENTITY_ID . '=?', $storeAttribute->getStoreEntityId())
-            ->where(StoreAttributeInterface::SCOPE_ID . '=?', $storeAttribute->getScopeId()
-            );
+            ->where(StoreAttributeInterface::SCOPE_ID . '=?', $storeAttribute->getScopeId());
 
         $select = $this->getConnection()->fetchRow($select);
         if ($select !== false) {
@@ -107,5 +104,4 @@ class StoreAttribute extends AbstractDb
             return null;
         }
     }
-
 }

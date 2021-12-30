@@ -79,7 +79,6 @@ class ImportCSV extends Command
      * @param StoreRepositoryInterface $storeRepository
      */
     public function __construct(
-        $name = null,
         State $state,
         DirectoryList $directoryList,
         StoreInterfaceFactory $storeInterfaceFactory,
@@ -87,9 +86,9 @@ class ImportCSV extends Command
         GeoCoderInterface $geoCoder,
         StoreRepositoryInterface $storeRepository,
         StoreAttributeInterfaceFactory $storeAttribute,
-        StoreAttributeRepositoryInterface $storeAttributeRepository
-    )
-    {
+        StoreAttributeRepositoryInterface $storeAttributeRepository,
+        $name = null
+    ) {
         $this->geoCoder = $geoCoder;
         $this->storeRepository = $storeRepository;
         $this->directoryList = $directoryList;
@@ -109,10 +108,10 @@ class ImportCSV extends Command
         $this->setName('import:store:csv');
         $this->setDescription('Import stores from csv to DB');
         $this->addOption(
-          self::NAME,
-          null,
-          InputOption::VALUE_REQUIRED,
-          'File name'
+            self::NAME,
+            null,
+            InputOption::VALUE_REQUIRED,
+            'File name'
         );
         $this->addOption(
             self::PATH,
@@ -143,7 +142,6 @@ class ImportCSV extends Command
         $filename = $input->getOption(self::NAME);
         $filepath = $input->getOption(self::PATH);
         $this->importCSV($filename, $filepath, $storeView);
-
     }
 
     /**
@@ -155,13 +153,13 @@ class ImportCSV extends Command
         $filename,
         $filepath,
         $storeView
-    )
-    {
+    ) {
 
         $file = $filepath . $filename;
         $csvData = fopen($file, 'r');
-        if (!$storeView)
+        if (!$storeView) {
             $storeView = 0;
+        }
         $counter = 1;
         $keys = fgetcsv($csvData);
         while ($row = fgetcsv($csvData)) {

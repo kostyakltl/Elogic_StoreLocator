@@ -9,7 +9,6 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\App\RequestInterface;
-use Exception;
 
 class View implements HttpGetActionInterface
 {
@@ -36,8 +35,7 @@ class View implements HttpGetActionInterface
         StoreRepositoryInterface $storeRepository,
         ConfigProvider $configProvider,
         RedirectFactory $redirectFactory
-    )
-    {
+    ) {
         $this->redirectFactory = $redirectFactory;
         $this->configProvider = $configProvider;
         $this->storeRepository = $storeRepository;
@@ -52,15 +50,15 @@ class View implements HttpGetActionInterface
     public function execute()
     {
         $page = $this->pageFactory->create();
-        if($this->configProvider->isModuleEnable() ==  false) {
+        if ($this->configProvider->isModuleEnable() ==  false) {
             return $this->redirectFactory->create()->setUrl('/');
         }
 
         $store = $this->request->getParam('store');
-        if(!$store) {
+        if (!$store) {
             return $this->redirectFactory->create()->setPath('/');
         }
-        if($store->getData() == null) {
+        if ($store->getData() == null) {
             $page->getConfig()->getTitle()->prepend('No such store');
             return $page;
         }

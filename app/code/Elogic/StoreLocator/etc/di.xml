@@ -72,9 +72,6 @@
     <type name="Elogic\StoreLocator\Model\Store">
         <plugin name="AttributesGetter" type="Elogic\StoreLocator\Plugin\StoreAttributesGetter" sortOrder="10" disabled="false"/>
     </type>
-    <type name="Elogic\StoreLocator\Model\StoreRepository">
-        <plugin name="StoreRepositoryPlugin" type="Elogic\StoreLocator\Plugin\StoreRepositoryPlugin" sortOrder="10" disabled="true"/>
-    </type>
     <type name="Elogic\StoreLocator\Model\StoreAttributeRepository">
         <plugin name="StoreAttributeRepositoryPlugin" type="Elogic\StoreLocator\Plugin\StoreAttributeRepositoryPlugin" sortOrder="10" disabled="false"/>
     </type>

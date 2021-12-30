@@ -4,5 +4,9 @@ namespace Elogic\StoreLocator\Api;
 
 interface GeoCoderInterface
 {
-    public function getCoordinatesByAddress($address);
+    /**
+     * @param string $address
+     * @return mixed
+     */
+    public function getCoordinatesByAddress(string $address);
 }

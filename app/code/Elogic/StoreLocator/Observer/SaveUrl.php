@@ -6,9 +6,6 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Elogic\StoreLocator\Model\ResourceModel\Store as StoreResource;
 
-/**
- *
- */
 class SaveUrl implements ObserverInterface
 {
     /**
@@ -39,19 +36,17 @@ class SaveUrl implements ObserverInterface
                 if ($this->storeResource->checkUniqueUrl($url) == true) {
                     return $store;
                 }
+            } else {
+                throw new \Exception();
             }
-            else throw new \Exception();
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $name = str_replace(' ', '-', strtolower($data['store_name']));
             if ($this->storeResource->checkUniqueUrl($name) == false) {
                 $store->setUrl($name);
-            }
-            else {
+            } else {
                 $store->setUrl($name . '-' . random_int(0, 100));
             }
         }
         return $store;
     }
 }
-

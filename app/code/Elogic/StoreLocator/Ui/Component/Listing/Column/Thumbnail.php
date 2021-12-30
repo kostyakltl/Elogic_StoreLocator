@@ -8,17 +8,9 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\UrlInterface;
 
-
-/**
- *
- */
 class Thumbnail extends \Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail
 {
-    /**
-     *
-     */
     const ALT_FIELD = 'title';
-
 
     /**
      * @var StoreManagerInterface
@@ -47,8 +39,7 @@ class Thumbnail extends \Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail
         UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         $this->urlBuilder = $urlBuilder;
         $this->storeManager = $storeManager;
         parent::__construct($context, $uiComponentFactory, $imageHelper, $urlBuilder, $components, $data);
@@ -56,7 +47,7 @@ class Thumbnail extends \Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail
 
     /**
      * @param array $dataSource
-     * @return array|void
+     * @return array
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function prepareDataSource(array $dataSource)
@@ -68,8 +59,8 @@ class Thumbnail extends \Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail
                 $url = '';
                 if ($item[$fieldName] != '') {
                     $url = $this->storeManager->getStore()->getBaseUrl(
-                            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                        ) . 'elogic/base_path/' . $item[$fieldName];
+                        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+                    ) . 'elogic/base_path/' . $item[$fieldName];
                 }
                 $item[$fieldName . '_src'] = $url;
                 $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';
@@ -92,6 +83,4 @@ class Thumbnail extends \Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail
         $altField = $this->getData('config/altField') ?: self::ALT_FIELD;
         return $row[$altField] ?? null;
     }
-
-
 }

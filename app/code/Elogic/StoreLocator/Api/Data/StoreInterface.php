@@ -1,11 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elogic\StoreLocator\Api\Data;
 
-
-/**
- *
- */
 interface StoreInterface
 {
     /**
@@ -22,108 +20,108 @@ interface StoreInterface
     const STORE_URL_KEY                     = 'store_url_key';
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId();
+    public function getId(): int;
 
     /**
-     * @param $store_id
-     * @return mixed
-     */
-    public function setId($store_id);
-
-    /**
-     * @return mixed
-     */
-    public function getName();
-
-    /**
-     * @param $store_name
+     * @param int $store_id
      * @return StoreInterface
      */
-    public function setName($store_name);
-
-    /**
-     * @return mixed
-     */
-    public function getDescription();
-
-    /**
-     * @param $store_description
-     * @return StoreInterface
-     */
-    public function setDescription($store_description);
-
-    /**
-     * @return mixed
-     */
-    public function getImage();
-
-    /**
-     * @param $store_image
-     * @return mixed
-     */
-    public function setImage($store_image);
+    public function setId(int $store_id): StoreInterface;
 
     /**
      * @return string
      */
-    public function getSchedule();
+    public function getName(): string;
+
+    /**
+     * @param string $store_name
+     * @return StoreInterface
+     */
+    public function setName(string $store_name): StoreInterface;
+
+    /**
+     * @return string
+     */
+    public function getDescription() :string;
+
+    /**
+     * @param string $store_description
+     * @return StoreInterface
+     */
+    public function setDescription(string $store_description): StoreInterface;
+
+    /**
+     * @return string|array|null
+     */
+    public function getImage(): ?string;
+
+    /**
+     * @param string|array $store_image
+     * @return StoreInterface
+     */
+    public function setImage($store_image): StoreInterface;
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string;
+
+    /**
+     * @param string $store_address
+     * @return StoreInterface
+     */
+    public function setAddress(string $store_address): StoreInterface;
 
     /**
      * @return string|null
      */
-    public function getAddress();
+    public function getSchedule(): ?string;
 
     /**
-     * @param $store_address
+     * @param string $store_schedule
      * @return StoreInterface
      */
-    public function setAddress($store_address);
+    public function setSchedule(string $store_schedule): StoreInterface;
 
     /**
-     * @param $store_schedule
-     * @return mixed
+     * @return string|null
      */
-    public function setSchedule($store_schedule);
+    public function getLongitude(): ?string;
 
     /**
-     * @return mixed
+     * @param string $store_longitude
+     * @return StoreInterface
      */
-    public function getLongitude();
+    public function setLongitude(string $store_longitude): StoreInterface;
 
     /**
-     * @param $store_longitude
-     * @return mixed
+     * @return string|null
      */
-    public function setLongitude($store_longitude);
+    public function getLatitude(): ?string;
 
     /**
-     * @return mixed
+     * @param string $store_latitude
+     * @return StoreInterface
      */
-    public function getLatitude();
+    public function setLatitude(string $store_latitude): StoreInterface;
 
     /**
-     * @param $store_latitude
-     * @return mixed
+     * @return string
      */
-    public function setLatitude($store_latitude);
+    public function getUrl(): string;
 
     /**
-     * @return mixed
+     * @param string $store_url_key
+     * @return StoreInterface
      */
-    public function getUrl();
+    public function setUrl(string $store_url_key): StoreInterface;
 
     /**
-     * @param $store_url_key
-     * @return mixed
+     * return store by url key
+     * @param string $store_url_key
+     * @return StoreInterface
      */
-    public function setUrl($store_url_key);
-
-    /**
-     * @param $store_url_key
-     * @return mixed
-     */
-    public function checkUrlKey($store_url_key);
-
+    public function checkUrlKey(string $store_url_key): StoreInterface;
 }

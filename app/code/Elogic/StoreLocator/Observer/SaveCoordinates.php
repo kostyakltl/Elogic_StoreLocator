@@ -8,7 +8,6 @@ use Magento\Framework\Event\ObserverInterface;
 
 class SaveCoordinates implements ObserverInterface
 {
-
     /**
      * @var GeoCoder
      */
@@ -17,7 +16,7 @@ class SaveCoordinates implements ObserverInterface
     /**
      * @param GeoCoder $geoCoder
      */
-    public function __construct(GeoCoder $geoCoder )
+    public function __construct(GeoCoder $geoCoder)
     {
         $this->geoCoder = $geoCoder;
     }
@@ -35,8 +34,7 @@ class SaveCoordinates implements ObserverInterface
             if ($data['store_latitude'] !== "" || $data['store_longitude'] !== "") {
                 return $store;
             }
-        }
-        finally {
+        } finally {
             $address = $store->getAddress();
             $coordinates = $this->geoCoder->getCoordinatesByAddress($address);
             $store->setLatitude($coordinates[1]);

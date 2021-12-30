@@ -12,38 +12,28 @@ use Elogic\StoreLocator\Model\ResourceModel\StoreAttribute as StoreAttributeReso
 
 class Options extends Column
 {
-
     /**
      * @var StoreAttributeResource
      */
     private $storeAttributeResource;
-    /**
-     * @var Http
-     */
-    private $request;
 
     /**
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param array $components
      * @param array $data
-     * @param Http $request
      * @param StoreAttributeResource $storeAttributeResource
      */
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
+        StoreAttributeResource $storeAttributeResource,
         array $components = [],
-        array $data = [],
-        Http $request,
-        StoreAttributeResource $storeAttributeResource
-    )
-    {
+        array $data = []
+    ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
-        $this->request = $request;
         $this->storeAttributeResource = $storeAttributeResource;
     }
-
 
     /**
      * @param array
@@ -53,33 +43,33 @@ class Options extends Column
     public function prepareDataSource(array $dataSource)
     {
         $fieldName = $this->storeAttributeResource->getAttributes();
-        foreach ($fieldName as &$attr)
-           $dataSource = $this->setAttributes($dataSource, $attr);
+        foreach ($fieldName as &$attr) {
+            $dataSource = $this->setAttributes($dataSource, $attr);
+        }
         return $dataSource;
     }
 
-
     /**
      * @param array $dataSource
+     * @param $attr
      * @return array
      */
     public function setAttributes(array $dataSource, $attr)
     {
         $storeId = $this->getContext()->getFilterParam('elogic_store_attribute');
-        if(isset($dataSource['data']['items'])) {
+        if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 $storeEntityId = $item[StoreInterface::STORE_ID];
                 $value = $this->storeAttributeResource->getAttributeValue($storeEntityId, $storeId, $attr);
-                if (!$value)
+                if (!$value) {
                     $value = 'WARNING: No set ' . str_replace('store_', ' ', $attr) . ' for this this scope';
-                else
+                } else {
                     $value = $value['value'];
+                }
                 $this->setData($attr, $value);
                 $item[$attr] = $value;
             }
         }
         return $dataSource;
     }
-
-
 }

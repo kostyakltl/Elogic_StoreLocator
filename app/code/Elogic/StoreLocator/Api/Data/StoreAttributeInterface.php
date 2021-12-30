@@ -37,7 +37,6 @@ interface StoreAttributeInterface
      */
     const SCOPE_ID = 'store_id';
 
-
     /**
      * @return mixed
      */
@@ -48,6 +47,7 @@ interface StoreAttributeInterface
      * @return StoreAttributeInterface
      */
     public function setId(int $value_id) : StoreAttributeInterface;
+
     /**
      * @return int
      */
@@ -57,23 +57,23 @@ interface StoreAttributeInterface
      * @param int $attribute_id
      * @return StoreAttributeInterface
      */
-    public function setAttrId( int $attribute_id) : StoreAttributeInterface;
+    public function setAttrId(int $attribute_id) : StoreAttributeInterface;
 
     /**
      * @return string
      */
     public function getValue() : string;
+
     /**
      * @param string $value
      * @return StoreAttributeInterface
      */
     public function setValue(string $value) : StoreAttributeInterface;
 
-
     /**
-     * @return mixed
+     * @return int
      */
-    public function getStoreEntityId();
+    public function getStoreEntityId(): int;
 
     /**
      * @param int $entity_id
@@ -99,5 +99,4 @@ interface StoreAttributeInterface
      * @return mixed
      */
     public function getAttributeValue(int $storeEntityId, int $storeId, string $attributeCode);
-
 }

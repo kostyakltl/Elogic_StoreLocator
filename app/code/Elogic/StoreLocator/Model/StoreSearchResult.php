@@ -7,6 +7,4 @@ use Magento\Framework\Api\Search\SearchResult;
 
 class StoreSearchResult extends SearchResult implements StoreSearchResultInterface
 {
-
-
 }

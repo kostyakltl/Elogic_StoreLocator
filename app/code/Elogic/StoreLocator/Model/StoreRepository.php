@@ -18,12 +18,8 @@ use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Event\ManagerInterface as EventManager;
 use Exception;
 
-/**
- *
- */
 class StoreRepository implements StoreRepositoryInterface
 {
-
     /**
      * @var StoreInterfaceFactory
      */
@@ -50,6 +46,7 @@ class StoreRepository implements StoreRepositoryInterface
      * @param Resource $storeResource
      * @param CollectionFactory $collectionFactory
      * @param StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory
+     * @param EventManager $eventManager
      */
     public function __construct(
         StoreInterfaceFactory $storeFactory,
@@ -57,8 +54,7 @@ class StoreRepository implements StoreRepositoryInterface
         CollectionFactory $collectionFactory,
         StoreSearchResultInterfaceFactory $searchResultsInterfaceFactory,
         EventManager $eventManager
-    )
-    {
+    ) {
         $this->storeFactory = $storeFactory;
         $this->collectionFactory = $collectionFactory;
         $this->storeResource = $storeResource;
@@ -104,7 +100,7 @@ class StoreRepository implements StoreRepositoryInterface
      * @param int|null $storeView_id
      * @return string|StoreInterface $store
      */
-    public function getById(int $store_id, int $storeView_id=null): StoreInterface
+    public function getById(int $store_id, int $storeView_id = null): StoreInterface
     {
         $store = $this->storeFactory->create();
         $this->storeResource->load($store, $store_id);

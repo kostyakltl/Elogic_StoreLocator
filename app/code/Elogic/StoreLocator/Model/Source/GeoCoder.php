@@ -7,26 +7,33 @@ use Elogic\StoreLocator\Model\ConfigProvider;
 
 class GeoCoder implements GeoCoderInterface
 {
+    /**
+     * @var ConfigProvider
+     */
     private $configProvider;
 
+    /**
+     * @param ConfigProvider $configProvider
+     */
     public function __construct(
         ConfigProvider $configProvider
-    )
-    {
+    ) {
         $this->configProvider = $configProvider;
     }
 
-    public function getCoordinatesByAddress($address)
+    /**
+     * @param string $address
+     * @return array|string
+     */
+    public function getCoordinatesByAddress(string $address)
     {
         $apiKey = $this->configProvider->getGoogleMapsApiKey();
         $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&sensor=false&key='.$apiKey);
-        if(strpos($geo, 'error_message')){
+        if (strpos($geo, 'error_message')) {
             $coordinates = 'ErrorApi';
-        }
-        elseif(strpos($geo, 'ZERO_RESULTS')) {
+        } elseif (strpos($geo, 'ZERO_RESULTS')) {
             $coordinates = 'ZERO_RESULTS';
-        }
-        else {
+        } else {
             $geo = json_decode($geo, true);
             if (isset($geo['status']) && ($geo['status'] == 'OK')) {
                 $coordinates[0] = $geo['results'][0]['geometry']['location']['lat'];

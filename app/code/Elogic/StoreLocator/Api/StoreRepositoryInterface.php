@@ -33,7 +33,7 @@ interface StoreRepositoryInterface
      * @param int|null $storeView_id
      * @return StoreInterface
      */
-    public function getById(int $store_id, int $storeView_id=null): StoreInterface;
+    public function getById(int $store_id, int $storeView_id = null): StoreInterface;
 
     /**
      * @param SearchCriteriaInterface $searchCriteria

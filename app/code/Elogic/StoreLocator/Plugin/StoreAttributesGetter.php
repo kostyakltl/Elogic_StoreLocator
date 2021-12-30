@@ -9,7 +9,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
 
 /**
- * This plugins returns attribute depending on attributes
+ * This plugin returns attribute depending on attributes
  */
 class StoreAttributesGetter
 {
@@ -27,13 +27,13 @@ class StoreAttributesGetter
     /**
      * @param StoreAttributeInterfaceFactory $storeAttributeInterfaceFactory
      * @param Http $request
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         StoreAttributeInterfaceFactory $storeAttributeInterfaceFactory,
         Http $request,
         StoreManagerInterface $storeManager
-    )
-    {
+    ) {
         $this->storeManager = $storeManager;
         $this->request = $request;
         $this->storeAttributeFactory = $storeAttributeInterfaceFactory;
@@ -48,15 +48,17 @@ class StoreAttributesGetter
     {
         $id = $store->getId();
         $storeId = $this->request->getParam('store', 0) ?? $store->getData('store_view_id');
-        if (is_object($storeId))
+        if (is_object($storeId)) {
             $storeId = $this->storeManager->getStore()->getId();
+        }
         $storeAttribute = $this->storeAttributeFactory->create();
         if ($id !== null) {
             $name = $storeAttribute->getAttributeValue($id, $storeId, 'store_name');
-            if ($name == false)
+            if ($name == false) {
                 return 'WARNING: No set name for this store view';
-            else
+            } else {
                 return $name['value'];
+            }
         }
         return null;
     }
@@ -64,20 +66,23 @@ class StoreAttributesGetter
     /**
      * @param Store $store
      * @return string|void|null
+     * @throws NoSuchEntityException
      */
     public function afterGetSchedule(Store $store)
     {
         $id = $store->getId();
         $storeId = $this->request->getParam('store', 0) ?? $store->getData('store_view_id');
-        if (is_object($storeId))
+        if (is_object($storeId)) {
             $storeId = $this->storeManager->getStore()->getId();
+        }
         $storeAttribute = $this->storeAttributeFactory->create();
-        if($id!== null) {
+        if ($id!== null) {
             $schedule = $storeAttribute->getAttributeValue($id, $storeId, 'store_schedule');
-            if($schedule == false)
+            if ($schedule == false) {
                 return null;
-            else
+            } else {
                 return $schedule['value'];
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elogic\StoreLocator\Model;
 
 use Elogic\StoreLocator\Api\Data\StoreAttributeInterface;
@@ -22,19 +24,18 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->getData(self::ID);
     }
-
 
     /**
      * @param int $value_id
      * @return StoreAttributeInterface
      */
-    public function setID($value_id) : StoreAttributeInterface
+    public function setId($value_id) : StoreAttributeInterface
     {
-        $this->setData(self::ID,$value_id);
+        $this->setData(self::ID, $value_id);
         return $this;
     }
 
@@ -48,7 +49,7 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
 
     /**
      * @param int $attribute_id
-     * @return $this
+     * @return StoreAttributeInterface
      */
     public function setAttrId(int $attribute_id): StoreAttribute
     {
@@ -66,7 +67,7 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
 
     /**
      * @param string $value
-     * @return $this
+     * @return StoreAttributeInterface
      */
     public function setValue(string $value): StoreAttribute
     {
@@ -77,7 +78,7 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
     /**
      * @return int
      */
-    public function getStoreEntityId()
+    public function getStoreEntityId(): int
     {
         return $this->getData(self::ENTITY_ID);
     }
@@ -102,7 +103,7 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
 
     /**
      * @param int $scope_id
-     * @return $this
+     * @return StoreAttributeInterface
      */
     public function setScopeId(int $scope_id): StoreAttribute
     {
@@ -111,20 +112,20 @@ class StoreAttribute extends AbstractModel implements StoreAttributeInterface
     }
 
     /**
-     * @param $storeEntityId int
-     * @param $storeId int
-     * @param $attributeCode string
-     * @return mixed|bool|null
+     * @param int $storeEntityId
+     * @param int $storeId
+     * @param string $attributeCode
+     * @return string|null
      */
-    public function getAttributeValue(int $storeEntityId, int $storeId, string $attributeCode)
+    public function getAttributeValue(int $storeEntityId, int $storeId, string $attributeCode): ?string
     {
         return $this->_resource->getAttributeValue($storeEntityId, $storeId, $attributeCode);
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->_resource->getAttributes();
     }

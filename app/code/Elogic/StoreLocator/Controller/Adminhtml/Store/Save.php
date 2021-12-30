@@ -14,7 +14,6 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Serialize\Serializer\Json;
-use function Symfony\Component\String\s;
 
 /**
  * Save store entity controller
@@ -59,7 +58,6 @@ class Save extends Action
      * @param Json $json
      * @param StoreAttributeInterfaceFactory $storeAttributeInterfaceFactory
      * @param StoreAttributeRepositoryInterface $storeAttributeRepository
-     * @param EventManager $eventManager
      */
     public function __construct(
         Context $context,
@@ -70,8 +68,7 @@ class Save extends Action
         Json $json,
         StoreAttributeInterfaceFactory $storeAttributeInterfaceFactory,
         StoreAttributeRepositoryInterface $storeAttributeRepository
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->storeFactory = $storeFactory;
         $this->storeRepository = $storeRepository;
@@ -94,10 +91,11 @@ class Save extends Action
 
         $storeId = $data['store_id'];
 
-        if (!$data['store_entity_id'])
+        if (!$data['store_entity_id']) {
             $data['store_entity_id'] = null;
-        else
+        } else {
             $store->setId($data['store_entity_id']);
+        }
 
         $store->setName($data['store_name']);
         $store->setDescription($data['store_description']);
@@ -161,8 +159,7 @@ class Save extends Action
                 $storeId = $item;
                 $this->setAttributeData($entityId, $data, $storeId);
             }
-        }
-        elseif(sizeof($storeId) ) {    // value = 0 if was set all store views
+        } elseif (sizeof($storeId)) {    // value = 0 if was set all store views
             $this->setAttributeData($entityId, $data, $storeId[0]);
         }
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elogic\StoreLocator\Model;
 
 use Elogic\StoreLocator\Api\StoreAttributeRepositoryInterface;
@@ -34,20 +36,18 @@ class StoreAttributeRepository implements StoreAttributeRepositoryInterface
         ResourceModel $storeAttributeResource,
         StoreAttributeInterfaceFactory $storeAttributeFactory,
         StoreManagerInterface $storeManager
-    )
-    {
+    ) {
         $this->storeAttributeResource = $storeAttributeResource;
         $this->storeAttributeFactory = $storeAttributeFactory;
         $this->storeManager = $storeManager;
     }
 
-
     /**
-     * @param $storeAttribute
+     * @param StoreAttributeInterface $storeAttribute
      * @return StoreAttributeInterface
      * @throws AlreadyExistsException
      */
-    public function save($storeAttribute) : StoreAttributeInterface
+    public function save(StoreAttributeInterface $storeAttribute) : StoreAttributeInterface
     {
         if ($storeAttribute->getScopeId() == 0) { //if scope id = 0 - save for all store views
             $storeList = $this->storeManager->getStores($withDefault= true);
@@ -70,7 +70,7 @@ class StoreAttributeRepository implements StoreAttributeRepositoryInterface
      * @return void
      * @throws Exception
      */
-    public function delete($storeAttribute) : void
+    public function delete(StoreAttributeInterface $storeAttribute) : void
     {
         $this->storeAttributeResource->delete($storeAttribute);
     }

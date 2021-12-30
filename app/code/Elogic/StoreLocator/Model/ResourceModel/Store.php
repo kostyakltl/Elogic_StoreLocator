@@ -2,21 +2,16 @@
 
 namespace Elogic\StoreLocator\Model\ResourceModel;
 
-
 use Elogic\StoreLocator\Api\Data\StoreInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\DB\Select;
 
-/**
- *
- */
 class Store extends AbstractDb
 {
     /**
      * Name of entity table
      */
     const ENTITY_TABLE_NAME = 'elogic_store_entity';
-
 
     /**
      * @return void
@@ -28,10 +23,10 @@ class Store extends AbstractDb
 
     /**
      * Return store entity id by url key
-     * @param $url
+     * @param string $url
      * @return string
      */
-    public function checkUrlKey($url)
+    public function checkUrlKey(string $url): string
     {
         $select = $this->loadByUrlKey($url);
         $select->reset(Select::COLUMNS)
@@ -41,24 +36,25 @@ class Store extends AbstractDb
         return $this->getConnection()->fetchOne($select);
     }
 
-    public function checkUniqueUrl($url)
+    /**
+     * Check if url key is unique
+     * @param string $url
+     * @return bool
+     */
+    public function checkUniqueUrl($url): bool
     {
         $select = $this->getConnection()->select()
             ->from([self::ENTITY_TABLE_NAME])
             ->where(StoreInterface::STORE_URL_KEY . '= ?', $url);
-//
-//        $select->reset(Select::COLUMNS)
-//            ->columns(StoreInterface::STORE_ID)
-//            ->limit(1);
 
-        if($this->getConnection()->fetchOne($select) == false) {
-            return false;
+        if ($this->getConnection()->fetchOne($select) == false) {
+            return false; //url key is unique
         }
-        return true;
+        return true; //url key is not unique
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @return Select
      */
     public function loadByUrlKey($url)
@@ -69,5 +65,4 @@ class Store extends AbstractDb
 
         return $select;
     }
-
 }

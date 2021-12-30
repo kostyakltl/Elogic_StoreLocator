@@ -7,9 +7,6 @@ namespace Elogic\StoreLocator\Ui\Component\Form;
 
 use Magento\Store\Ui\Component\Listing\Column\Store\Options as StoreOptions;
 
-/**
- * Store Options for Cms Pages and Blocks
- */
 class Options extends StoreOptions
 {
     /**

@@ -10,12 +10,26 @@ use Elogic\StoreLocator\Api\Data\StoreInterface;
 
 class Actions extends Column
 {
+    /**
+     * Edit action path
+     */
     const URL_PATH_EDIT = 'storelocator/store/edit';
+    /**
+     * Delete action path
+     */
     const URL_PATH_DELETE = 'storelocator/store/delete';
-    const URL_PATH_VIEW = 'storelocator/store/view';
 
+    /**
+     * @var UrlInterface
+     */
     private $urlBuilder;
+    /**
+     * @var ContextInterface
+     */
     protected $context;
+    /**
+     * @var UiComponentFactory
+     */
     protected $uiComponentFactory;
 
     /**
@@ -25,37 +39,38 @@ class Actions extends Column
      * @param array $data
      * @param UrlInterface $urlBuilder
      */
-   public function __construct(
-       ContextInterface $context,
-       UiComponentFactory $uiComponentFactory,
-       array $components = [],
-       array $data = [],
-       UrlInterface $urlBuilder
+    public function __construct(
+        ContextInterface $context,
+        UiComponentFactory $uiComponentFactory,
+        UrlInterface $urlBuilder,
+        array $components = [],
+        array $data = []
+    ) {
+        $this->context = $context;
+        $this->uiComponentFactory = $uiComponentFactory;
+        $this->urlBuilder = $urlBuilder;
+        parent::__construct($context, $uiComponentFactory, $components, $data);
+    }
 
-   )
-   {
-       $this->context = $context;
-       $this->uiComponentFactory = $uiComponentFactory;
-       $this->urlBuilder = $urlBuilder;
-       parent::__construct($context, $uiComponentFactory, $components, $data);
-   }
-
-
+    /**
+     * @param array $dataSource
+     * @return array
+     */
     public function prepareDataSource(array $dataSource)
     {
-        if(isset($dataSource['data']['items'])) {
+        if (isset($dataSource['data']['items'])) {
             $storeId = $this->getData('store_entity_id');
         }
-        foreach ($dataSource['data']['items'] as  &$item) {
-           $item[$this->getData('name')]['edit'] = [
+        foreach ($dataSource['data']['items'] as &$item) {
+            $item[$this->getData('name')]['edit'] = [
                'href' => $this->urlBuilder->getUrl(
                    self::URL_PATH_EDIT,
                    [StoreInterface::STORE_ID => $item[StoreInterface::STORE_ID]]
-                ),
+               ),
                'label' => __('Edit'),
                'hidden' => false,
                ];
-           $item[$this->getData('name')]['delete'] = [
+            $item[$this->getData('name')]['delete'] = [
                 'href' => $this->urlBuilder->getUrl(
                     self::URL_PATH_DELETE,
                     [StoreInterface::STORE_ID => $item[StoreInterface::STORE_ID]]
